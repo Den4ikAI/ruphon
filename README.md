@@ -61,6 +61,11 @@ print(f"Phonemized: {result}")
 ```
 
 ## Использование с автоматической расстановкой ударений
+Установите RUAccent:
+```
+pip install ruaccent
+```
+Запустите код:
 
 ```python
 from ruphon import RUPhon
@@ -84,6 +89,9 @@ result = phonemizer.phonemize(accented_text, put_stress=True, stress_symbol="'")
 print(f"Phonemized: {result}")
 ```
 
+## Контакты
+
+Вы можете написать автору в telegram: https://t.me/m/bceloss
 ## Донат
 Вы можете поддержать проект деньгами. Это поможет быстрее разрабатывать более качественные новые версии. 
 CloudTips: https://pay.cloudtips.ru/p/b9d86686
