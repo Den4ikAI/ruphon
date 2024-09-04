@@ -1,0 +1,22 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "ruphon"
+authors = [{name = "Denis Petrov, Ivan Shivalov", email = "arduino4b@gmail.com"}]
+dynamic = ["version", "description"]
+readme = "README.md"
+license = {file = "LICENSE"}
+
+dependencies = [
+    "huggingface_hub",
+    "onnxruntime",
+    "transformers",
+    "numpy",
+    "razdel"
+]
+
+
+[project.urls]
+Home = "https://github.com/Den4ikAI/ruphon"
