@@ -14,7 +14,7 @@ from .char_tokenizer import CharacterTokenizer
 
 class TextPreprocessor:
     def split_by_words(string):
-        string = string.replace(" - ",' ~ ')
+        string = string.replace(" - ",' ^ ')
         match = list(re.finditer(r"\w*(?:\+\w+)*|[^\w\s]+", string.lower()))
         remaining_text =  [string[l.end():r.start()] for l,r in zip(match, match[1:])]
 
@@ -37,12 +37,12 @@ class TextPreprocessor:
         return result
         
     def delete_spaces_before_punc(text):
-        punc = "!\"#$%&'()*,./:;<=>?@[\\]^_`{|}-"
+        punc = "!\"#$%&'()*,./:;<=>?@[\\]_`{|}-"
         for char in punc:
             if char == '-':
                 text = text.replace(" " + char, char).replace(char + " ", char)
             text = text.replace(" " + char, char)
-        return text.replace('~', '-')
+        return text.replace('^', '-')
 
 
 
