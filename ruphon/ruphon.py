@@ -37,12 +37,13 @@ class TextPreprocessor:
         return result
         
     def delete_spaces_before_punc(text):
-        punc = "!\"#$%&'()*,./:;<=>?@[\\]_`{|}-"
+        punc = "!\"#$%&()*,./:;<=>?@[\\]_`{|}-"
         for char in punc:
             if char == '-':
                 text = text.replace(" " + char, char).replace(char + " ", char)
             text = text.replace(" " + char, char)
         return text.replace('^', '-')
+
 
 
 
