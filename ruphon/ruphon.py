@@ -95,7 +95,7 @@ class RUPhon:
 
     def _predict_single(self, word: str) -> List[str]:
         inputs = self.tokenizer([word.lower()], padding=True, return_tensors="np")
-        ort_inputs = {name: inputs[name] for name in self.input_names}
+        ort_inputs = {name: inputs[name].astype(np.int64) for name in self.input_names}
         ort_outputs = self.ort_session.run(self.output_names, ort_inputs)
         
         logits = ort_outputs[0]
