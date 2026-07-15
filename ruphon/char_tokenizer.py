@@ -4,13 +4,7 @@ from pathlib import Path
 from typing import Dict, List, Optional, Sequence, Union
 
 from transformers.tokenization_utils import AddedToken, PreTrainedTokenizer
-from transformers.utils import (
-    cached_file,
-    copy_func,
-    download_url,
-    extract_commit_hash,
-    is_remote_url,
-)
+from transformers.utils import cached_file, extract_commit_hash
 
 
 class CharacterTokenizer(PreTrainedTokenizer):
