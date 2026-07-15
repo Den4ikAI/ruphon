@@ -13,6 +13,7 @@ from .char_tokenizer import CharacterTokenizer
 
 
 class TextPreprocessor:
+    @staticmethod
     def split_by_words(string):
         string = string.replace(" - ",' ^ ')
         match = list(re.finditer(r"\w*(?:\+\w+)*|[^\w\s]+", string.lower()))
@@ -28,6 +29,7 @@ class TextPreprocessor:
         remaining_text_res.append("".join(remaining_text[words_mask[-1]+1:]))
         return valid_words, remaining_text_res
 
+    @staticmethod
     def split_by_sentences(string):
         sentences = list(sentenize(string))
         if len(sentences) == 0:
@@ -36,6 +38,7 @@ class TextPreprocessor:
         result[-1] = result[-1] + string[sentences[-1].stop:]
         return result
         
+    @staticmethod
     def delete_spaces_before_punc(text):
         punc = "!\"#$%&()*,./:;<=>?@[\\]_`{|}-"
         for char in punc:
@@ -95,7 +98,14 @@ class RUPhon:
 
     def _predict_single(self, word: str) -> List[str]:
         inputs = self.tokenizer([word.lower()], padding=True, return_tensors="np")
-        ort_inputs = {name: inputs[name].astype(np.int64) for name in self.input_names}
+        ort_inputs = {}
+        for name in self.input_names:
+            if name in inputs:
+                ort_inputs[name] = inputs[name].astype(np.int64)
+            elif name == "token_type_ids":
+                ort_inputs[name] = np.zeros_like(inputs["input_ids"])
+            else:
+                raise KeyError(f"Expected input '{name}' not found in tokenizer output: {list(inputs.keys())}")
         ort_outputs = self.ort_session.run(self.output_names, ort_inputs)
         
         logits = ort_outputs[0]
